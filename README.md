@@ -5,7 +5,7 @@ The app will be able to do two things:
 
 1. When user parks a car, user presses "Watch car button". This enables the app to "watch" if there are any parking attendants nerby. If so, user gets notified. 
 2. When user see parking attendants, press "Alert" to notify users with parked cars nearby. 
-3. The time for the "Watch" activity will be aprox. 10 min. 
+(The time for the "Watch" activity will be aprox. 10 min.)
 
 # Requirements to run the application.
 
