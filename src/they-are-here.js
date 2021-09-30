@@ -9,7 +9,7 @@ const theyAreHere = (position) => {
   //Register postion in Alerts DB
   lib.registerInDB(position, DB_Path_Alerts);
   //Check if Alert position.city is in Cars DB
-  lib.checkIfMatch(position, DB_Path_Cars);
+  return lib.checkIfMatch(position, DB_Path_Cars);
 };
 
 module.exports = theyAreHere;

@@ -9,7 +9,7 @@ const watchMyCar = (position) => {
   //Register postion in Alerts DB
   lib.registerInDB(position, DB_Path_Cars);
   //Check if Alert position.city is in Cars DB
-  lib.checkIfMatch(position, DB_Path_Alerts);
+  return lib.checkIfMatch(position, DB_Path_Alerts);
 };
 
 module.exports = watchMyCar;

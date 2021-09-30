@@ -67,17 +67,17 @@ const getAddress = (lat, long, todo) => {
       }
     })
     .then(function (res) {
-      const result = JSON.parse(res.data);
-      console.log("getAdress res: ", result);
+      const posAndMatch = res.data;
+      console.log("getAdress res: ", posAndMatch);
 
       paraGraph.insertAdjacentText(
         "afterbegin",
         `
-        ${result.results[0].address_components[5].long_name},
-        ${result.results[0].address_components[3].long_name},
-        ${result.results[0].address_components[2].long_name},
-        ${result.results[0].address_components[1].long_name}
-        ${result.results[0].address_components[0].long_name}
+        ${posAndMatch.position.country},
+        ${posAndMatch.position.city},
+        ${posAndMatch.position.area},
+        ${posAndMatch.position.street}
+        ${posAndMatch.position.streetNumber}
         `
       );
     })

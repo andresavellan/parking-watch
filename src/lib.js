@@ -49,31 +49,41 @@ const registerInDB = (position, databasePath) => {
 };
 
 const checkIfMatch = (position, databasePath) => {
+  let message = "";
   //Check if city matches
   if (fs.existsSync(databasePath + "/" + position.country + ".json")) {
     const db = require(databasePath + "/" + position.country + ".json");
-    const match = db.filter((element) => element.city === position.city);
+
+    let match = db.filter((element) => element.city === position.city);
 
     if (match[0]) {
-      console.log(
-        `${
-          databasePath.includes("cars") ? "CarsDB" : "AlertsDB"
-        } exist and there is a match!`,
-        match[0]
-      );
+      match[0].info = `${
+        databasePath.includes("cars") ? "CarsDB" : "AlertsDB"
+      } exist and this object is the match!`;
+      //message = JSON.stringify(match[0]);
+      message = match[0];
     } else {
-      console.log(
-        `${
-          databasePath.includes("cars") ? "CarsDB" : "AlertsDB"
-        } exist but there's NO match`,
-        match[0]
-      );
+      match[0] = {
+        match: {
+          info: `${
+            databasePath.includes("cars") ? "CarsDB" : "AlertsDB"
+          } exist but there's NO match.`
+        }
+      };
+      message = match[0];
     }
   } else {
-    console.log(
-      `${databasePath.includes("cars") ? "CarsDB" : "AlertsDB"} does NOT exist`
-    );
+    match = {
+      match: {
+        info: `${
+          databasePath.includes("cars") ? "CarsDB" : "AlertsDB"
+        } does NOT exist`
+      }
+    };
+    message = match;
   }
+
+  return message;
 };
 
 module.exports = { getPosition, registerInDB, checkIfMatch };

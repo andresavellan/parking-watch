@@ -45,57 +45,30 @@ app.get("/api", (req, res) => {
     const data = response.body;
 
     //return position to user
-    res.json(data);
 
     //Register and compare positions
     if (todo === "they-are-here") {
-      theyAreHere(lib.getPosition(data));
+      const position = lib.getPosition(data);
+      const matchInAlerts = theyAreHere(position);
+      let positionAndMatch = {
+        position: position,
+        match: matchInAlerts
+      };
+      console.log(positionAndMatch);
+      res.json(positionAndMatch);
     } else if (todo === "watch-my-car") {
-      watchMyCar(lib.getPosition(data));
+      const position = lib.getPosition(data);
+      const matchInAlerts = watchMyCar(position);
+      let positionAndMatch = {
+        position: position,
+        match: matchInAlerts
+      };
+
+      console.log(positionAndMatch);
+      res.json(positionAndMatch);
     }
   });
 });
-
-// const watchMyCar = (data) => {
-//   //retrieve position data: Country, city, area, street and street number
-//   const dataObject = JSON.parse(data);
-//   const country = dataObject.results[0].address_components[5].long_name;
-//   const city = dataObject.results[0].address_components[3].short_name;
-//   const area = dataObject.results[0].address_components[2].short_name;
-//   const street = dataObject.results[0].address_components[1].long_name;
-//   const streetNumber = dataObject.results[0].address_components[0].long_name;
-
-//   //Store data in object
-//   const position = {
-//     city,
-//     area,
-//     street,
-//     streetNumber
-//   };
-//   if (fs.existsSync(DB_Path_Cars + "/" + country + ".json")) {
-//     const db = require(DB_Path_Cars + "/" + country + ".json");
-//     const actualDB = db;
-//     actualDB.push(position);
-//     try {
-//       fs.writeFileSync(
-//         DB_Path_Cars + "/" + country + ".json",
-//         JSON.stringify(actualDB, null, 2)
-//       );
-//     } catch (err) {
-//       console.log("Error writing Metadata.json:" + err.message);
-//     }
-//     //Push new postion to existing .json file
-//   } else {
-//     try {
-//       fs.writeFileSync(
-//         DB_Path_Cars + "/" + country + ".json",
-//         JSON.stringify([position], null, 2)
-//       );
-//     } catch (err) {
-//       console.log("Error writing Metadata.json:" + err.message);
-//     }
-//   }
-// };
 
 //Return 404 page
 app.get("*", (req, res) => {
