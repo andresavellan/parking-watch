@@ -1,4 +1,4 @@
-# Park Watch
+# Parking Watch
 
 This project is an ongoing development for practicing purposes only. 
 The app will be able to do two things: 
